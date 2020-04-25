@@ -1,0 +1,318 @@
+{
+  "intents": [
+    {
+      "intent": "maxmembers",
+      "examples": [
+        {
+          "text": "what are the maximum members at each center"
+        },
+        {
+          "text": "how many members are allowed"
+        },
+        {
+          "text": "how many are entered"
+        },
+        {
+          "text": "maximum members"
+        },
+        {
+          "text": "how many members should be there at each center"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "greeting",
+      "examples": [
+        {
+          "text": "good morning"
+        },
+        {
+          "text": "hello"
+        },
+        {
+          "text": "hiii"
+        },
+        {
+          "text": "Namaste"
+        },
+        {
+          "text": "hii watson"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "enquiry",
+      "examples": [
+        {
+          "text": "I want to find quarantine center"
+        },
+        {
+          "text": "I want to find near by testing center"
+        },
+        {
+          "text": "I want to find nearby commodities centers"
+        },
+        {
+          "text": "I want to find food and civil services center"
+        },
+        {
+          "text": "I want to find pharmacy center"
+        },
+        {
+          "text": "what are the Items provided"
+        },
+        {
+          "text": "maximum number"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "enquiry",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Items",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "maximum number",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "15kg of Rice,sugar,vegetables"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1587786967315",
+      "conditions": "@enquiry:Items",
+      "dialog_node": "response_8_1587787056667"
+    },
+    {
+      "type": "standard",
+      "title": "maxmembers",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "100 per center  and should maintain social distancing with masks and sanitizer with u"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "crowd gathering",
+            "source": "https://s3.amazonaws.com/aphs.worldnomads.com/gemma/14638/CIMG2422.jpg",
+            "description": "This is strictly prohibited",
+            "response_type": "image"
+          },
+          {
+            "values": [
+              {
+                "text": "This has to be done at each center"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "social distancing",
+            "source": "https://i.ytimg.com/vi/Gev15o6zd-Y/maxresdefault.jpg",
+            "response_type": "image"
+          },
+          {
+            "values": [
+              {
+                "text": "If u find more than maximum in cente1 I will help you with another one"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#maxmembers",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_8_1587790289820",
+      "previous_sibling": "node_7_1587786967315"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_8_1587790289820",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "greeting",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hii user this is watson i am here for u"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#greeting",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_2_1587786152226",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "enquiry",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Here are  the centers located  near to you"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "food supply center",
+            "source": "https://www.thehindubusinessline.com/economy/policy/ggd25n/article28227058.ece/ALTERNATES/LANDSCAPE_1200/pds",
+            "description": "center 1",
+            "response_type": "image"
+          },
+          {
+            "values": [
+              {
+                "text": "If  u want essential commodities ,here  is the pharmacy shop near you"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "pharmacy 1",
+            "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQUQFH1t3z1E2jQNitp6sQjQFk495O7nFtg-d-zmgRIQqO0cbWw&usqp=CAU",
+            "description": "for sanitizers and any other commodities",
+            "response_type": "image"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "user_input",
+        "dialog_node": "node_7_1587786967315"
+      },
+      "conditions": "#enquiry",
+      "dialog_node": "node_7_1587788429340",
+      "previous_sibling": "node_2_1587786152226"
+    },
+    {
+      "type": "standard",
+      "title": "enquiry",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#enquiry",
+      "dialog_node": "node_7_1587786967315",
+      "previous_sibling": "node_7_1587788429340"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "people assistant",
+  "language": "en",
+  "description": ""
+}
